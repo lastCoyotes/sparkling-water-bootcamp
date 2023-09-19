@@ -1,3 +1,8 @@
+extern crate num_traits;
+extern crate num_integer;
+extern crate num_bigint;
+extern crate rand;
+
 use num_traits::FromPrimitive;
 use num_traits::{One, Zero};
 use num_integer::Integer;
@@ -43,15 +48,15 @@ fn main() {
 
     let mut m = String::new();
     println!("Enter message to encrypt: ");
-    let x = std::io::stdin().read_line(&mut m).unwrap();
+    let _x = std::io::stdin().read_line(&mut m).unwrap();
     println!("Message: {}", m);
-    let strByte = BigInt::from_bytes_be(Sign::Plus, m.clone());
+    let strByte = BigInt::from_bytes_be(Sign::Plus, m.clone().as_bytes());
     // encrypt str_byte
-    let em = modpow(strByte.clone(), e, product.clone());
+    let em = mod_pow(strByte.clone(), e, product.clone());
     println!("Encrypted Message: {}", em);
 
     // decrypt em
-    let dm = modpow(em, modInvE, product);
+    let dm = mod_pow(em, modInvE, product);
     println!("Decrypted Message: {}", dm);
 
 }
@@ -73,7 +78,7 @@ fn millerRabinAlgo(num: &BigInt, k: usize) -> bool {
     let mut d = num - BigInt::from(1);
     let mut s = 0;
 
-    while &d.is_even() {
+    while d.is_even() {
         d /= BigInt::from(2);
         s += 1;
     }
@@ -89,18 +94,18 @@ fn millerRabinAlgo(num: &BigInt, k: usize) -> bool {
         }
 
         for _ in 0..s-1 {
-            x = x.modpow(&BigInt::from(2), &n);
+            x = x.modpow(&BigInt::from(2), &num);
 
             if x == BigInt::from(1) {
                 return false;
             }
 
-            if x == n - BigInt::from(1) {
+            if x == num - BigInt::from(1) {
                 break;
             }
         }
 
-        if x != n - BigInt::from(1) {
+        if x != num - BigInt::from(1) {
             return false;
         }
     }    
@@ -157,7 +162,7 @@ fn mod_pow(base: BigInt, exp: BigInt, modulus: BigInt) -> BigInt {
 
     while exp > BigInt::zero() {
         if exp.is_odd() {
-            res = (&res * &base) %modulus;
+            res = (&res * &base) % &modulus;
         }
 
         exp = exp >> 1;

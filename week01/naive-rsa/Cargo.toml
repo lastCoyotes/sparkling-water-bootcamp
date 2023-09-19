@@ -1,13 +1,13 @@
 [package]
 name = "naive-rsa"
+version = "0.1.0"
 edition = "2021"
-authors = "Tristan"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 
-num-bigint = "0.4.4"
-num-traits = "0.2.16"
-rand = "0.8.5"
-num-integer = "0.1.45"
+num-bigint = { version = "0.4", features = ["rand"] }
+num-traits = "0.2"
+rand = "0.8.3"
+num-integer = "0.1"
