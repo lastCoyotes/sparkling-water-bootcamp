@@ -3,5 +3,7 @@ LambdaClass Sparkling Water Bootcamp 2023
 
 As part of LambdaClass's 20-week internship, week by week schedule and resources found [here](https://github.com/lambdaclass/sparkling_water_bootcamp/tree/main).
 
-This repository is a compilation of my exercises and challenges completed, organized by week.
+This repository is a hub of my exercises and challenges completed, organized by week.
 I hope to implement additional Python versions for the sake of teaching, but it will first be coded in Rust.
+
+Week 1 - [Naive RSA](https://github.com/lastCoyotes/naiveRSA)
